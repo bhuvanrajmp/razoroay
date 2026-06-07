@@ -1,11 +1,11 @@
 package com.MyFirstSpringbootApp.razoroay.payment.entity;
 
+import com.MyFirstSpringbootApp.razoroay.common.enums.PaymentActor;
 import com.MyFirstSpringbootApp.razoroay.common.enums.PaymentEvent;
 import com.MyFirstSpringbootApp.razoroay.common.enums.PaymentStatus;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-import java.util.Locale;
 import java.util.UUID;
 
 @Entity
@@ -33,8 +33,9 @@ public class PaymentTransitionLog {
     @Column(name = "to_status",nullable = false)
     private PaymentStatus toStatus;
 
+    @Enumerated(EnumType.STRING)
     @Column(length = 100,name = "actor")
-    private String actor;
+    private PaymentActor actor;
 
     @Column(name = "occurred_at",length = 100)
     private LocalDateTime occurredAt;
