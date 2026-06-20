@@ -2,11 +2,18 @@ package com.MyFirstSpringbootApp.razoroay.merchant.entity;
 
 import com.MyFirstSpringbootApp.razoroay.common.enums.UserRole;
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.UUID;
 
 @Entity
 @Table(name = "app_user")
+@Builder
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+
 public class AppUser {
 
     @Id
