@@ -1,0 +1,16 @@
+package com.MyFirstSpringbootApp.razoroay.common.exception;
+
+import lombok.Getter;
+
+@Getter
+public class ResourceNotFoundException extends RuntimeException {
+
+    private final String resourceName;
+    private final Object identifier;
+
+    public ResourceNotFoundException(String resourceName, Object identifier) {
+        super(resourceName +"Not Found: "+ identifier);
+        this.resourceName = resourceName;
+        this.identifier = identifier;
+    }
+}

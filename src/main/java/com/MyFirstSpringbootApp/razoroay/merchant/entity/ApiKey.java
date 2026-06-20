@@ -2,12 +2,18 @@ package com.MyFirstSpringbootApp.razoroay.merchant.entity;
 
 import com.MyFirstSpringbootApp.razoroay.common.enums.Environment;
 import jakarta.persistence.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
 @Table(name = "api_key")
+@Builder
+@Getter
+@Setter
 public class ApiKey {
 
     @Id
