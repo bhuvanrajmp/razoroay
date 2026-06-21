@@ -7,7 +7,6 @@ import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDateTime;
 import java.util.Map;
-import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -29,7 +28,7 @@ public class DlqEvent {
 
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(columnDefinition = "jsonb",nullable = false)
-    private Map<String, Objects> payload;
+    private Map<String, Object> payload;
 
 
     private LocalDateTime movedAt;

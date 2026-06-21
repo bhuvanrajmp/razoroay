@@ -2,18 +2,18 @@ package com.MyFirstSpringbootApp.razoroay.merchant.entity;
 
 import com.MyFirstSpringbootApp.razoroay.common.enums.Environment;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
 @Table(name = "api_key")
-@Builder
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class ApiKey {
 
     @Id
@@ -30,11 +30,15 @@ public class ApiKey {
     @Column(nullable = false,length = 200)
     private String keySecretHash;
 
+    @Column(length = 200)
+    private String previousKeySecretHash;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Environment environment;
 
     @Column(nullable = false)
+    @Builder.Default
     private Boolean enabled=true;
 
 

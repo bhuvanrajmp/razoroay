@@ -10,7 +10,7 @@ import com.MyFirstSpringbootApp.razoroay.merchant.entity.Merchant;
 import com.MyFirstSpringbootApp.razoroay.merchant.repository.AppUserRepository;
 import com.MyFirstSpringbootApp.razoroay.merchant.repository.MerchantRepository;
 import com.MyFirstSpringbootApp.razoroay.merchant.service.AuthService;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
