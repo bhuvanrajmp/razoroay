@@ -3,6 +3,7 @@ package com.MyFirstSpringbootApp.razoroay.merchant.service.impl;
 import com.MyFirstSpringbootApp.razoroay.common.enums.MerchantStatus;
 import com.MyFirstSpringbootApp.razoroay.common.enums.UserRole;
 import com.MyFirstSpringbootApp.razoroay.common.exception.DuplicateResourceException;
+import com.MyFirstSpringbootApp.razoroay.merchant.Mapper.MerchantMapper;
 import com.MyFirstSpringbootApp.razoroay.merchant.dto.request.MerchantSignUpRequest;
 import com.MyFirstSpringbootApp.razoroay.merchant.dto.response.MerchantResponse;
 import com.MyFirstSpringbootApp.razoroay.merchant.entity.AppUser;
@@ -27,6 +28,8 @@ public class AuthServiceImpl implements AuthService {
 
     private final AppUserRepository appUserRepository;
 
+    private final MerchantMapper merchantMapper;
+
 
     @Override
     @Transactional
@@ -36,13 +39,8 @@ public class AuthServiceImpl implements AuthService {
             throw new DuplicateResourceException("DUPLICATE_MERCHANT_EMAIL","Merchant with email :"+request.email()+" already exists");
         }
 
-        Merchant merchant = Merchant.builder()
-                .name(request.name())
-                .businessName(request.businessName())
-                .email(request.email())
-                .businessType(request.businessType())
-                .status(MerchantStatus.PENDING_KYC)
-                .build();
+        Merchant merchant = merchantMapper.toEntitySignUpRequest(request);
+        merchant.setStatus(MerchantStatus.PENDING_KYC);
 
         merchant = merchantRepository.save(merchant);
 
@@ -56,12 +54,7 @@ public class AuthServiceImpl implements AuthService {
         appUser = appUserRepository.save(appUser);
 
 
-        return new MerchantResponse(
-                merchant.getId(),
-                merchant.getName(),
-                merchant.getEmail(),
-                merchant.getBusinessName(),
-                merchant.getBusinessType(),
-                merchant.getStatus());
+        return merchantMapper.toResponse(merchant);
+
     }
 }

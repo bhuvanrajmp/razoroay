@@ -4,6 +4,8 @@ import com.MyFirstSpringbootApp.razoroay.common.entity.Money;
 import com.MyFirstSpringbootApp.razoroay.common.enums.PaymentMethod;
 import com.MyFirstSpringbootApp.razoroay.common.enums.PaymentStatus;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
@@ -13,6 +15,8 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "payment")
+@Getter
+@Setter
 public class Payment {
 
     @Id
@@ -35,11 +39,11 @@ public class Payment {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private PaymentStatus Status;
+    private PaymentStatus status;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private PaymentMethod Method;
+    private PaymentMethod method;
 
     @JdbcTypeCode((SqlTypes.JSON))
     @Column(columnDefinition ="jsonb",name = "method_details")

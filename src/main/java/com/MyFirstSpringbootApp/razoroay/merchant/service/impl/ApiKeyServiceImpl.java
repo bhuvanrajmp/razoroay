@@ -1,8 +1,10 @@
 package com.MyFirstSpringbootApp.razoroay.merchant.service.impl;
 
 
+import com.MyFirstSpringbootApp.razoroay.common.exception.DuplicateResourceException;
 import com.MyFirstSpringbootApp.razoroay.common.exception.ResourceNotFoundException;
 import com.MyFirstSpringbootApp.razoroay.common.util.RandomizerUtil;
+import com.MyFirstSpringbootApp.razoroay.merchant.Mapper.ApiKeyMapper;
 import com.MyFirstSpringbootApp.razoroay.merchant.dto.request.ApiKeyCreateRequest;
 import com.MyFirstSpringbootApp.razoroay.merchant.dto.response.ApiKeyCreateResponse;
 import com.MyFirstSpringbootApp.razoroay.merchant.dto.response.ApiKeyResponse;
@@ -30,6 +32,8 @@ public class ApiKeyServiceImpl implements ApiKeyService {
     private final MerchantRepository merchantRepository;
 
     private final ApiKeyRepository apiKeyRepository;
+
+    private  final ApiKeyMapper apiKeyMapper;
 
     @Override
     @Transactional
@@ -62,16 +66,7 @@ public class ApiKeyServiceImpl implements ApiKeyService {
     @Override
     public List<ApiKeyResponse> listByMerchant(UUID merchantId) {
 
-        return apiKeyRepository.findByMerchantId_Id(merchantId).stream()
-                .map(apiKey ->
-                        new ApiKeyResponse(
-                                apiKey.getId(),
-                                apiKey.getKeyId(),
-                                apiKey.getEnvironment(),
-                                apiKey.getEnabled(),
-                                apiKey.getLastUsedAt(),
-                                null))
-                .toList();
+        return apiKeyMapper.toResponses(apiKeyRepository.findByMerchantId_Id(merchantId));
     }
 
     @Override
@@ -92,6 +87,8 @@ public class ApiKeyServiceImpl implements ApiKeyService {
         ApiKey apiKey = apiKeyRepository.findById(keyId)
                 .filter(k-> k.getMerchantId().getId().equals(merchantId))
                 .orElseThrow(()-> new ResourceNotFoundException("ApiKey", keyId));
+
+        if(!apiKey.getEnabled()) throw new DuplicateResourceException("KEY_DISABLED","Cannot rotate a disabled key");
 
         String newRawSecret = RandomizerUtil.randomBase64(40);
 
