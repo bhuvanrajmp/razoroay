@@ -8,7 +8,6 @@ import org.hibernate.type.SqlTypes;
 import java.security.KeyRep;
 import java.time.LocalDateTime;
 import java.util.Map;
-import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -28,7 +27,7 @@ public class WebhookEvent {
 
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(columnDefinition = "jsonb")
-    private Map<String, Objects> payload;
+    private Map<String, Object> payload;
 
     @Column(nullable = false)
     private String targetUrl;
