@@ -5,6 +5,7 @@ import com.MyFirstSpringbootApp.razoroay.common.entity.Money;
 import com.MyFirstSpringbootApp.razoroay.common.enums.PaymentMethod;
 import com.MyFirstSpringbootApp.razoroay.common.enums.PaymentStatus;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.JdbcTypeCode;
@@ -16,12 +17,13 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "payment",indexes = {
-        @Index(name = "idx_order_id_merchant_id",columnList = "order_id,merchant_id"),
+        @Index(name = "idx_payment_order_id_merchant_id",columnList = "order_id,merchant_id"),
         @Index(name = "idx_merchant_id",columnList = "merchant_id")
 
 })
 @Getter
 @Setter
+@Builder
 public class Payment extends BaseEntity {
 
     @Id
