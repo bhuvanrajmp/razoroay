@@ -1,5 +1,6 @@
 package com.MyFirstSpringbootApp.razoroay.merchant.entity;
 
+import com.MyFirstSpringbootApp.razoroay.common.entity.BaseEntity;
 import com.MyFirstSpringbootApp.razoroay.common.enums.Environment;
 import jakarta.persistence.*;
 import lombok.*;
@@ -8,13 +9,15 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "api_key")
+@Table(name = "api_key", indexes = {
+        @Index(name = "idx_api_Key_merchant_id", columnList = "merchant_id,environment,enabled")}
+       )
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ApiKey {
+public class ApiKey extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

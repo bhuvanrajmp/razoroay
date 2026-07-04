@@ -1,6 +1,7 @@
 package com.MyFirstSpringbootApp.razoroay.payment.entity;
 
 
+import com.MyFirstSpringbootApp.razoroay.common.entity.BaseEntity;
 import com.MyFirstSpringbootApp.razoroay.common.entity.Money;
 import com.MyFirstSpringbootApp.razoroay.common.enums.RefundStatus;
 import com.MyFirstSpringbootApp.razoroay.merchant.entity.Merchant;
@@ -15,7 +16,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "refund")
-public class Refund {
+public class Refund extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

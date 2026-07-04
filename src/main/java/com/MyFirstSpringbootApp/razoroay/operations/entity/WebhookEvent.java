@@ -1,5 +1,6 @@
 package com.MyFirstSpringbootApp.razoroay.operations.entity;
 
+import com.MyFirstSpringbootApp.razoroay.common.entity.BaseEntity;
 import com.MyFirstSpringbootApp.razoroay.common.enums.WebHookEventStatus;
 import jakarta.persistence.*;
 import org.hibernate.annotations.JdbcTypeCode;
@@ -12,7 +13,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "Webhook_event")
-public class WebhookEvent {
+public class WebhookEvent extends BaseEntity {
 
 
     @Id

@@ -1,5 +1,6 @@
 package com.MyFirstSpringbootApp.razoroay.operations.entity;
 
+import com.MyFirstSpringbootApp.razoroay.common.entity.BaseEntity;
 import jakarta.persistence.*;
 import org.hibernate.annotations.JdbcType;
 import org.hibernate.annotations.JdbcTypeCode;
@@ -11,7 +12,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "dlq_event")
-public class DlqEvent {
+public class DlqEvent extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
