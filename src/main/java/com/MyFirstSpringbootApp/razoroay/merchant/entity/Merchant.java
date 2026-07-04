@@ -1,5 +1,6 @@
 package com.MyFirstSpringbootApp.razoroay.merchant.entity;
 
+import com.MyFirstSpringbootApp.razoroay.common.entity.BaseEntity;
 import com.MyFirstSpringbootApp.razoroay.common.enums.BusinessType;
 import com.MyFirstSpringbootApp.razoroay.common.enums.MerchantStatus;
 import jakarta.persistence.*;
@@ -8,13 +9,17 @@ import lombok.*;
 import java.util.UUID;
 
 @Entity
-@Table(name = "merchant")
+@Table(name = "merchant",indexes = {
+        @Index(name = "idx_merchant_status", columnList = "status"),
+        @Index(name = "idx_merchant_email", columnList = "email")
+}
+)
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Merchant {
+public class Merchant extends BaseEntity {
 
 
     @Id

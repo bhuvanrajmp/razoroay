@@ -1,8 +1,8 @@
 package com.MyFirstSpringbootApp.razoroay.operations.entity;
 
+import com.MyFirstSpringbootApp.razoroay.common.entity.BaseEntity;
 import jakarta.persistence.*;
 
-import java.util.UUID;
 
 @Entity
 @Table(name = "settlement_payment")

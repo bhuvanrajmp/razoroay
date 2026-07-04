@@ -1,6 +1,7 @@
 package com.MyFirstSpringbootApp.razoroay.merchant.entity;
 
 
+import com.MyFirstSpringbootApp.razoroay.common.entity.BaseEntity;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -8,8 +9,11 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Entity
-@Table(name = "customer")
-public class Customer {
+@Table(name = "customer",indexes = {
+        @Index(name = "idx_customer_merchant_id",columnList = "merchant_id"),
+        @Index(name = "idx_customer_merchant_email",columnList = "email")
+})
+public class Customer extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

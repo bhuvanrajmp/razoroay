@@ -1,5 +1,6 @@
 package com.MyFirstSpringbootApp.razoroay.operations.entity;
 
+import com.MyFirstSpringbootApp.razoroay.common.entity.BaseEntity;
 import com.MyFirstSpringbootApp.razoroay.common.entity.Money;
 import com.MyFirstSpringbootApp.razoroay.common.enums.SettlementStatus;
 import jakarta.persistence.*;
@@ -9,7 +10,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "settlement")
-public class Settlement {
+public class Settlement extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
